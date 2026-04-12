@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Mail, Github, Linkedin } from "lucide-react";
-import profileImage from "../assets/image.png";
+import profileImage from "../assets/Ram_profile.jpg";
 import About from "./About";
 import Skills from "./Skills";
 import Portfolio from "./Portfolio";
@@ -23,10 +23,7 @@ export default function Home() {
         {/* Left Side */}
         <div className="flex-1 bg-gray-200 p-10 md:p-20 flex flex-col justify-center relative z-10">
           {/* Logo */}
-          <div className="absolute top-8 left-10">
-            <div className="text-3xl font-extrabold text-gray-900">R</div>
-          </div>
-
+         
           {/* Intro Text */}
           <div className="max-w-lg mx-auto md:mx-0">
             <h2 className="text-2xl font-semibold text-gray-700 mb-3">
