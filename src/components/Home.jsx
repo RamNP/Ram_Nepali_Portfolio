@@ -1,121 +1,611 @@
-import React, { useRef } from "react";
-import { Mail, Github, Linkedin } from "lucide-react";
+import React, { useState } from "react";
+import {
+  ArrowRight,
+  ArrowUpRight,
+  BriefcaseBusiness,
+  CheckCircle2,
+  Code2,
+  Database,
+  Download,
+  ExternalLink,
+  Github,
+  Handshake,
+  Layers3,
+  Linkedin,
+  Mail,
+  MapPin,
+  Menu,
+  Send,
+  Smartphone,
+  Sparkles,
+  Terminal,
+  X,
+} from "lucide-react";
 import profileImage from "../assets/Ram_profile.jpg";
-import About from "./About";
-import Skills from "./Skills";
-import Portfolio from "./Portfolio";
-import Contact from "./Contact";
+
+const navItems = [
+  ["About", "about"],
+  ["Skills", "skills"],
+  ["Projects", "projects"],
+  ["Services", "services"],
+  ["Process", "process"],
+  ["Contact", "contact"],
+];
+const projects = [
+  {
+    title: "Bus Pass Management System",
+    type: "Android Native App",
+    description:
+      "Digital transit platform with QR validation, online renewals, payments, and offline route caching.",
+    tags: ["Kotlin", "Jetpack Compose", "REST API"],
+    tone: "project-green",
+    icon: Smartphone,
+  },
+  {
+    title: "Bus Attendance & Tracking",
+    type: "Cross-Platform App",
+    description:
+      "Fleet tracking, automated boarding verification, route assistance, and real-time alerts for families.",
+    tags: ["Flutter", "Firebase", "Cloud Functions"],
+    tone: "project-amber",
+    icon: CheckCircle2,
+  },
+  {
+    title: "Ratnanagar Tourism Guide",
+    type: "Tourism & Travel App",
+    description:
+      "A city guide for cultural heritage, safari bookings, offline maps, and local homestay directories.",
+    tags: ["Flutter", "REST API", "Mapbox SDK"],
+    tone: "project-sage",
+    icon: MapPin,
+  },
+  {
+    title: "Dajuvai Multi-Vendor Commerce",
+    type: "Commercial Mobile App",
+    description:
+      "A full marketplace with dynamic catalogs, wallet payments, seller routing, and instant order tracking.",
+    tags: ["Flutter", "Django REST", "Payment API"],
+    tone: "project-dark",
+    icon: BriefcaseBusiness,
+  },
+];
+const services = [
+  [
+    Smartphone,
+    "Mobile App Development",
+    "Native Android and cross-platform Flutter applications built for high performance and smooth gestures.",
+  ],
+  [
+    Layers3,
+    "Web Application Development",
+    "Fast, scalable web applications, analytics portals, and customer platforms built with React and Vite.",
+  ],
+  [
+    Database,
+    "API & Backend Integration",
+    "Secure REST APIs, Firebase sync, JWT authentication, and relational database schemas.",
+  ],
+  [
+    Sparkles,
+    "UI/UX Implementation",
+    "Pixel-perfect Flutter and React interfaces equipped with subtle motion and polished interactions.",
+  ],
+  [
+    Code2,
+    "Bluetooth & IoT Integration",
+    "BLE peripheral pairing, telemetry transmission, sensor logging, and beacon alerts.",
+  ],
+  [
+    Terminal,
+    "Performance & Optimization",
+    "Memory profiling, bundle minimization, framerate stabilization, and release readiness audits.",
+  ],
+];
 
 export default function Home() {
-  const aboutRef = useRef(null);
-  const skillsRef = useRef(null);
-  const portfolioRef = useRef(null);
-  const contactRef = useRef(null);
-
-  const scrollToSection = (ref) => {
-    ref.current?.scrollIntoView({ behavior: "smooth" });
-  };
+  const [menuOpen, setMenuOpen] = useState(false);
+  const [filter, setFilter] = useState("All Work");
+  const [sent, setSent] = useState(false);
+  const visibleProjects = projects.filter(
+    (project) =>
+      filter === "All Work" ||
+      (filter === "Mobile"
+        ? project.type.includes("App")
+        : !project.type.includes("App")),
+  );
 
   return (
-    <>
-      {/* Hero Section */}
-      <section className="relative flex flex-col md:flex-row min-h-screen overflow-hidden font-sans">
-        {/* Left Side */}
-        <div className="flex-1 bg-gray-200 p-10 md:p-20 flex flex-col justify-center relative z-10">
-          {/* Logo */}
-         
-          {/* Intro Text */}
-          <div className="max-w-lg mx-auto md:mx-0">
-            <h2 className="text-2xl font-semibold text-gray-700 mb-3">
-              Hi, I am
-            </h2>
-            <h1 className="text-5xl font-extrabold text-gray-900 mb-2">
-              Ram Nepali
+    <div className="site-shell">
+      <header className="site-header">
+        <a className="brand" href="#top">
+          <span className="brand-mark">
+            <Terminal size={18} />
+          </span>
+          <span>
+            <strong>Ram.dev</strong>
+            <small>PORTFOLIO</small>
+          </span>
+        </a>
+        <nav className={menuOpen ? "main-nav open" : "main-nav"}>
+          {navItems.map(([label, id]) => (
+            <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>
+              {label}
+            </a>
+          ))}
+        </nav>
+        <a className="button button-dark header-cta" href="#contact">
+          Hire Me{" "}
+          <span>
+            <ArrowUpRight size={15} />
+          </span>
+        </a>
+        <button
+          className="menu-button"
+          aria-label="Toggle navigation"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <X size={21} /> : <Menu size={21} />}
+        </button>
+      </header>
+      <main id="top">
+        <section className="hero section-wrap">
+          <div className="hero-copy">
+            <div className="eyebrow status">
+              <span /> Available for hire
+            </div>
+            <h1>
+              I&apos;m a Mobile &amp; <em>Web Application</em> Developer.
             </h1>
-            <p className="text-gray-500 font-semibold mb-10">
-              Flutter & Android Developer /{" "}
-              <span className="text-gray-700">Front-end Developer</span>
+            <p>
+              Crafting fluid mobile applications with Flutter, Kotlin &amp;
+              Jetpack Compose, paired with robust web experiences using React
+              and Vite.
             </p>
-
-            {/* Social Icons */}
-            <div className="flex gap-5">
-              <a
-                href="#"
-                className="bg-gray-300 hover:bg-gray-400 p-3 rounded-md shadow-md transition"
-              >
-                <Mail className="w-5 h-5 text-gray-800" />
+            <div className="hero-actions">
+              <a className="button button-dark" href="#projects">
+                View My Projects <ArrowRight size={17} />
               </a>
-              <a
-                href="#"
-                className="bg-gray-300 hover:bg-gray-400 p-3 rounded-md shadow-md transition"
-              >
-                <Github className="w-5 h-5 text-gray-800" />
-              </a>
-              <a
-                href="#"
-                className="bg-gray-300 hover:bg-gray-400 p-3 rounded-md shadow-md transition"
-              >
-                <Linkedin className="w-5 h-5 text-gray-800" />
+              <a className="button button-light" href="#contact">
+                <Handshake size={17} /> Let&apos;s Work Together
               </a>
             </div>
+            <div className="quick-stats">
+              <div>
+                <CheckCircle2 size={25} />
+                <span>
+                  <b>99.8%</b>
+                  <small>Code Reliability</small>
+                </span>
+              </div>
+              <i />
+              <div>
+                <Sparkles size={25} />
+                <span>
+                  <b>50+</b>
+                  <small>Releases Shipped</small>
+                </span>
+              </div>
+            </div>
+          </div>
+          <div className="hero-visual">
+            <div className="sun-disc" />
+            <div className="portrait-frame">
+              <img
+                src={profileImage}
+                alt="Ram Nepali, mobile and web developer"
+              />
+            </div>
+            <div className="orbit-badge">
+              <span>AVAILABLE FOR PROJECTS • HIRE ME •</span>
+              <Terminal size={20} />
+            </div>
+            <div className="float-tag tag-one">● Flutter Specialist</div>
+            <div className="float-tag tag-two">Android &amp; Compose</div>
+            <div className="float-tag tag-three">React &amp; Tailwind</div>
+          </div>
+        </section>
+        <div className="ticker">
+          <div>
+            Flutter Apps <b>✦</b> Kotlin &amp; Jetpack Compose <b>✦</b> React
+            &amp; Vite <b>✦</b> Tailwind CSS <b>✦</b> Django REST API <b>✦</b>{" "}
+            Firebase Integration <b>✦</b> Bluetooth / BLE <b>✦</b> Clean
+            Architecture <b>✦</b>
           </div>
         </div>
-
-        {/* Right Side */}
-        <div className="flex-1 bg-black relative flex flex-col justify-center items-center">
-          {/* Top Navigation */}
-          <nav className="absolute top-8 right-12 flex items-center gap-8 text-white text-sm font-medium">
-            <button
-              onClick={() => scrollToSection(aboutRef)}
-              className="hover:text-gray-400 transition"
+        <section className="about-section" id="about">
+          <div className="section-wrap about-grid">
+            <div className="about-visual">
+              <div className="about-disc" />
+              <div className="about-photo">
+                <img
+                  src={profileImage}
+                  alt="Ram Nepali working as a developer"
+                />
+              </div>
+              <div className="mini-tags">
+                <span>Mobile App Dev</span>
+                <span>Web Architecture</span>
+                <span>API Integration</span>
+              </div>
+            </div>
+            <div className="about-copy">
+              <div className="eyebrow">— About Me</div>
+              <h2>
+                Who is this <em>Mobile &amp; Web Developer</em>?
+              </h2>
+              <p>
+                I am a versatile software engineer with a deep passion for
+                building high-performance cross-platform mobile apps and
+                resilient full-stack web applications. With mastery in Flutter,
+                Android native, and modern React ecosystems, I bridge elegant UI
+                with scalable architecture.
+              </p>
+              <p>
+                Whether designing reactive state pipelines, structuring Django
+                REST backends, or architecting real-time Firebase sync, I
+                believe in writing testable, production-ready code.
+              </p>
+              <div className="metrics">
+                <div>
+                  <b>4+</b>
+                  <span>Years Experience</span>
+                </div>
+                <div>
+                  <b>25+</b>
+                  <span>Projects Shipped</span>
+                </div>
+                <div>
+                  <b>100%</b>
+                  <span>Client Satisfaction</span>
+                </div>
+                <div>
+                  <b>10+</b>
+                  <span>Store Launches</span>
+                </div>
+              </div>
+              <div className="signature-row">
+                <a className="button button-amber" href="#contact">
+                  Download Resume <Download size={17} />
+                </a>
+                <span>
+                  <strong>Ram Nepali</strong>
+                  <small>Senior Mobile Engineer</small>
+                </span>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="section-wrap standard-section" id="skills">
+          <div className="section-heading centered">
+            <div className="eyebrow">— Tech Stack</div>
+            <h2>
+              Exploring the <em>Tools &amp; Technologies</em>
+              <br /> Behind My Work
+            </h2>
+            <p>
+              Battle-tested toolchains, frameworks, and architectural principles
+              applied across production deployments.
+            </p>
+          </div>
+          <div className="skill-grid">
+            {[
+              [
+                Smartphone,
+                "Mobile Engineering",
+                "Native Android and responsive cross-platform apps with smooth animations, caching, and offline-first sync.",
+                "Flutter & Dart",
+                "Kotlin Native",
+              ],
+              [
+                Code2,
+                "Web & Frontend",
+                "Performant, accessible, reactive single-page apps, dashboards, and responsive web portals.",
+                "React.js",
+                "Tailwind CSS",
+              ],
+              [
+                Database,
+                "Backend & Cloud",
+                "Robust API layers, cloud synchronization, authorization, and reliable integrations.",
+                "Django REST",
+                "Firebase Suite",
+              ],
+            ].map(([Icon, title, text, tag1, tag2]) => (
+              <article className="skill-card" key={title}>
+                <div className="icon-tile">
+                  {React.createElement(Icon, { size: 21 })}
+                </div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <div className="chip-row">
+                  <span>{tag1}</span>
+                  <span>{tag2}</span>
+                  <span>Clean Architecture</span>
+                </div>
+                <footer>
+                  Core Proficiency <b>90% Mastery</b>
+                </footer>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="projects-section" id="projects">
+          <div className="section-wrap">
+            <div className="section-heading project-heading">
+              <div>
+                <div className="eyebrow">— Featured Work</div>
+                <h2>
+                  Recent <em>Applications &amp; Case Studies</em>
+                </h2>
+                <p>
+                  Explore high-impact mobile and web applications built to
+                  address real-world challenges.
+                </p>
+              </div>
+              <div className="filter-row">
+                {["All Work", "Mobile", "Full-Stack"].map((item) => (
+                  <button
+                    key={item}
+                    className={filter === item ? "active" : ""}
+                    onClick={() => setFilter(item)}
+                  >
+                    {item}
+                  </button>
+                ))}
+              </div>
+            </div>
+            <div className="project-grid">
+              {visibleProjects.map(
+                ({ title, type, description, tags, tone, icon: Icon }) => (
+                  <article className="project-card" key={title}>
+                    <div className={`project-art ${tone}`}>
+                      {React.createElement(Icon, { size: 48 })}
+                      <span>{type}</span>
+                      <div className="art-window">
+                        <div />
+                        <div />
+                        <div />
+                        <div />
+                      </div>
+                    </div>
+                    <div className="project-body">
+                      <h3>{title}</h3>
+                      <p>{description}</p>
+                      <div className="chip-row">
+                        {tags.map((tag) => (
+                          <span key={tag}>{tag}</span>
+                        ))}
+                      </div>
+                      <div className="project-links">
+                        <a href="#contact">
+                          View Project <ExternalLink size={14} />
+                        </a>
+                        <a href="#contact">
+                          Case Study <ArrowUpRight size={14} />
+                        </a>
+                      </div>
+                    </div>
+                  </article>
+                ),
+              )}
+            </div>
+          </div>
+        </section>
+        <section className="section-wrap standard-section" id="services">
+          <div className="section-heading service-heading">
+            <div>
+              <div className="eyebrow">— Services</div>
+              <h2>
+                Services <em>I Provide</em>
+              </h2>
+              <p>
+                Full lifecycle software engineering from prototype architecture
+                to enterprise release.
+              </p>
+            </div>
+            <a className="button button-dark" href="#contact">
+              View All Services <ArrowRight size={17} />
+            </a>
+          </div>
+          <div className="service-grid">
+            {services.map(([Icon, title, text]) => (
+              <article className="service-card" key={title}>
+                <div className="icon-tile">
+                  {React.createElement(Icon, { size: 21 })}
+                </div>
+                <h3>{title}</h3>
+                <p>{text}</p>
+                <a href="#contact">
+                  Learn more <ArrowRight size={14} />
+                </a>
+              </article>
+            ))}
+          </div>
+        </section>
+        <section className="process-section" id="process">
+          <div className="section-wrap">
+            <div className="section-heading centered">
+              <div className="eyebrow">— Workflow</div>
+              <h2>
+                My Streamlined <em>Development Process</em>
+              </h2>
+              <p>
+                A disciplined roadmap that ensures transparency, predictable
+                delivery, and durable software.
+              </p>
+            </div>
+            <div className="process-grid">
+              {[
+                [
+                  "01",
+                  "Discovery & Scoping",
+                  "Business goals, technical constraints, users, APIs, and prerequisites.",
+                ],
+                [
+                  "02",
+                  "Architecture & UX",
+                  "Domain layers, state workflows, component contracts, and navigation maps.",
+                ],
+                [
+                  "03",
+                  "Build & QA Testing",
+                  "Iterative sprints with clean architecture, unit, widget, and integration tests.",
+                ],
+                [
+                  "04",
+                  "Release & Scale",
+                  "Store submissions, CI/CD automation, telemetry, and continuous updates.",
+                ],
+              ].map(([number, title, text]) => (
+                <article className="process-card" key={number}>
+                  <b>{number}</b>
+                  <h3>{title}</h3>
+                  <p>{text}</p>
+                  <i />
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
+        <section className="contact-section" id="contact">
+          <div className="section-wrap contact-panel">
+            <div className="contact-copy">
+              <div className="eyebrow">— Contact Me</div>
+              <h2>
+                Let&apos;s Build Something <em>Extraordinary</em> Together.
+              </h2>
+              <p>
+                Have an upcoming mobile app idea, web platform requirement, or
+                need an experienced full-stack engineer? Drop me a message and
+                let&apos;s get building.
+              </p>
+              <div className="contact-detail">
+                <Mail size={18} />
+                <span>
+                  <small>Email Address</small>
+                  <a href="mailto:ram@developer.build">ram@developer.build</a>
+                </span>
+              </div>
+              <div className="contact-detail">
+                <MapPin size={18} />
+                <span>
+                  <small>Location</small>
+                  <b>Chitwan, Nepal • Open to Remote Worldwide</b>
+                </span>
+              </div>
+              <div className="socials">
+                <a href="https://github.com/RamNP" aria-label="GitHub">
+                  <Github size={17} />
+                </a>
+                <a href="#contact" aria-label="LinkedIn">
+                  <Linkedin size={17} />
+                </a>
+                <a href="mailto:ram@developer.build" aria-label="Email">
+                  <Mail size={17} />
+                </a>
+              </div>
+            </div>
+            <form
+              className="contact-form"
+              onSubmit={(event) => {
+                event.preventDefault();
+                setSent(true);
+                event.currentTarget.reset();
+              }}
             >
-              About me
-            </button>
-            <button
-              onClick={() => scrollToSection(skillsRef)}
-              className="hover:text-gray-400 transition"
-            >
-              Skills
-            </button>
-            <button
-              onClick={() => scrollToSection(portfolioRef)}
-              className="hover:text-gray-400 transition"
-            >
-              Portfolio
-            </button>
-            <button
-              onClick={() => scrollToSection(contactRef)}
-              className="bg-white text-black font-semibold px-5 py-2 rounded-full hover:bg-gray-100 transition"
-            >
-              CONTACT ME
-            </button>
-          </nav>
-
-          {/* Profile Image */}
-          <img
-            src={profileImage}
-            alt="Profile"
-            className="w-80 h-80 md:w-[420px] md:h-[420px] object-cover z-10"
-          />
-
-          {/* Diagonal Background Divider */}
-          <div className="absolute top-0 left-0 w-full h-full bg-gray-200 clip-path-diagonal z-0"></div>
+              <div className="form-row">
+                <label>
+                  Your Name
+                  <input required placeholder="John Doe" />
+                </label>
+                <label>
+                  Email Address
+                  <input required type="email" placeholder="john@example.com" />
+                </label>
+              </div>
+              <label>
+                Project Scope
+                <select>
+                  <option>Cross-Platform Mobile App</option>
+                  <option>Web Application / SPA</option>
+                  <option>Full-Stack Solution</option>
+                  <option>Architecture Consultation</option>
+                </select>
+              </label>
+              <label>
+                Project Description
+                <textarea
+                  required
+                  rows="4"
+                  placeholder="Tell me about your product requirements, roadmap, timeline..."
+                />
+              </label>
+              {sent && (
+                <div className="success">
+                  <CheckCircle2 size={17} /> Thank you. I will get back to you
+                  within 24 hours.
+                </div>
+              )}
+              <button className="button button-dark form-submit" type="submit">
+                Send Message <Send size={16} />
+              </button>
+            </form>
+          </div>
+        </section>
+      </main>
+      <footer className="site-footer">
+        <div className="section-wrap footer-grid">
+          <div>
+            <a className="brand" href="#top">
+              <span className="brand-mark">
+                <Terminal size={18} />
+              </span>
+              <span>
+                <strong>Ram.dev</strong>
+                <small>PORTFOLIO</small>
+              </span>
+            </a>
+            <p>
+              Senior Mobile Engineer &amp; UI Architect crafting robust
+              applications with meticulous design and modern architecture.
+            </p>
+          </div>
+          <div>
+            <h3>Navigation</h3>
+            {navItems.slice(0, 4).map(([label, id]) => (
+              <a key={id} href={`#${id}`}>
+                {label}
+              </a>
+            ))}
+          </div>
+          <div>
+            <h3>Core Tech Stack</h3>
+            <p className="footer-chips">
+              <span>Flutter</span>
+              <span>React</span>
+              <span>Kotlin</span>
+              <span>Django</span>
+              <span>Firebase</span>
+            </p>
+          </div>
+          <div>
+            <h3>Connect</h3>
+            <a href="https://github.com/RamNP">
+              <Github size={14} /> GitHub
+            </a>
+            <a href="#contact">
+              <Linkedin size={14} /> LinkedIn
+            </a>
+            <a href="mailto:ram@developer.build">
+              <Mail size={14} /> Email
+            </a>
+          </div>
         </div>
-      </section>
-
-      {/* Sections Below */}
-      <div ref={aboutRef}>
-        <About />
-      </div>
-      <div ref={skillsRef}>
-        <Skills />
-      </div>
-      <div ref={portfolioRef}>
-        <Portfolio />
-      </div>
-      <div ref={contactRef}>
-        <Contact />
-      </div>
-    </>
+        <div className="footer-bottom section-wrap">
+          <span>© 2026 Ram.dev. All rights reserved.</span>
+          <span>Crafted with precision &amp; care.</span>
+        </div>
+      </footer>
+    </div>
   );
 }
