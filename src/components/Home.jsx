@@ -190,7 +190,7 @@ export default function Home() {
             <div className="sun-disc" />
             <div className="portrait-frame">
               <img
-                src="/Ram_profile.jpg"
+                src="/ram_profile.jpg"
                 alt="Ram Nepali, mobile and web developer"
               />
             </div>
@@ -217,7 +217,7 @@ export default function Home() {
               <div className="about-disc" />
               <div className="about-photo">
                 <img
-                  src="/Ram_profile.jpg"
+                  src="/ram_profile.jpg"
                   alt="Ram Nepali working as a developer"
                 />
               </div>
