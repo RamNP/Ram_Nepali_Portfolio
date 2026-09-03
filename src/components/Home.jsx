@@ -21,7 +21,6 @@ import {
   Terminal,
   X,
 } from "lucide-react";
-import profileImage from "../assets/Ram_profile.jpg";
 
 const navItems = [
   ["About", "about"],
@@ -136,7 +135,7 @@ export default function Home() {
         <a className="button button-dark header-cta" href="#contact">
           Hire Me{" "}
           <span>
-            <ArrowUpRight size={15} />
+            <ArrowUpRight size={20} />
           </span>
         </a>
         <button
@@ -191,7 +190,7 @@ export default function Home() {
             <div className="sun-disc" />
             <div className="portrait-frame">
               <img
-                src={profileImage}
+                src="/Ram_profile.jpg"
                 alt="Ram Nepali, mobile and web developer"
               />
             </div>
@@ -218,7 +217,7 @@ export default function Home() {
               <div className="about-disc" />
               <div className="about-photo">
                 <img
-                  src={profileImage}
+                  src="/Ram_profile.jpg"
                   alt="Ram Nepali working as a developer"
                 />
               </div>
