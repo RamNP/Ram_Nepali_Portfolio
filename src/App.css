@@ -171,7 +171,7 @@ h3 {
   max-width: 610px;
   margin: 23px 0 18px;
   color: var(--ink);
-  font-size: clamp(42px, 5vw, 64px);
+  font-size: clamp(36px, 4.4vw, 54px);
   line-height: 1.04;
   letter-spacing: -0.045em;
 }
@@ -189,7 +189,7 @@ h2 em {
 .process-card p,
 .contact-copy p {
   color: var(--muted);
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.7;
 }
 .hero p {
@@ -397,7 +397,7 @@ h2 em {
 .contact-copy h2 {
   margin: 10px 0 18px;
   color: #fff;
-  font-size: clamp(30px, 4vw, 45px);
+  font-size: clamp(27px, 3.5vw, 39px);
   line-height: 1.08;
   letter-spacing: -0.04em;
 }
@@ -520,7 +520,7 @@ h2 em {
 .process-card h3 {
   margin: 0 0 7px;
   color: var(--ink);
-  font-size: 17px;
+  font-size: 15px;
 }
 .skill-card p,
 .service-card p {
@@ -720,7 +720,7 @@ h2 em {
   box-shadow: 0 18px 34px rgba(16, 41, 30, 0.2);
 }
 .contact-copy h2 {
-  font-size: clamp(31px, 4vw, 45px);
+  font-size: clamp(28px, 3.5vw, 39px);
 }
 .contact-copy p {
   color: #bad0c3;
@@ -903,7 +903,7 @@ h2 em {
     padding-top: 110px;
   }
   .hero h1 {
-    font-size: 45px;
+    font-size: 38px;
   }
   .hero-visual {
     min-height: 430px;
@@ -935,7 +935,7 @@ h2 em {
   .about-copy h2,
   .section-heading h2,
   .contact-copy h2 {
-    font-size: 34px;
+    font-size: 30px;
   }
   .metrics {
     gap: 6px;

@@ -30,6 +30,7 @@ const navItems = [
   ["Process", "process"],
   ["Contact", "contact"],
 ];
+
 const projects = [
   {
     title: "Bus Pass Management System",
@@ -57,6 +58,15 @@ const projects = [
     tags: ["Flutter", "REST API", "Mapbox SDK"],
     tone: "project-sage",
     icon: MapPin,
+  },
+  {
+    title: "Robo Controller",
+    type: "Flutter Mobile App",
+    description:
+      "Bluetooth-based robot controller for real-time movement, device control, and wireless communication with ESP32-powered robots.",
+    tags: ["Flutter", "Dart", "Bluetooth BLE", "ESP32"],
+    tone: "project-blue",
+    icon: Smartphone,
   },
   {
     title: "Dajuvai Multi-Vendor Commerce",
@@ -222,9 +232,9 @@ export default function Home() {
                 />
               </div>
               <div className="mini-tags">
-                <span>Mobile App Dev</span>
-                <span>Web Architecture</span>
-                <span>API Integration</span>
+                <span>Android</span>
+                <span>Flutter</span>
+                <span>Web & Mobile</span>
               </div>
             </div>
             <div className="about-copy">
@@ -246,7 +256,7 @@ export default function Home() {
               </p>
               <div className="metrics">
                 <div>
-                  <b>4+</b>
+                  <b>3+</b>
                   <span>Years Experience</span>
                 </div>
                 <div>
@@ -263,12 +273,18 @@ export default function Home() {
                 </div>
               </div>
               <div className="signature-row">
-                <a className="button button-amber" href="#contact">
+                <a
+                  className="button button-amber"
+                  href="/Ram_Nepali_Resume.pdf"
+                  download
+                >
                   Download Resume <Download size={17} />
                 </a>
                 <span>
                   <strong>Ram Nepali</strong>
-                  <small>Senior Mobile Engineer</small>
+                  <small>
+                    Android|Flutter|Web & Mobile Application Developer
+                  </small>
                 </span>
               </div>
             </div>
@@ -482,24 +498,32 @@ export default function Home() {
                 <Mail size={18} />
                 <span>
                   <small>Email Address</small>
-                  <a href="mailto:ram@developer.build">ram@developer.build</a>
+                  <a href="mailto:pariyarram2023@gmail.com">
+                    pariyarram2023@gmail.com
+                  </a>
                 </span>
               </div>
               <div className="contact-detail">
                 <MapPin size={18} />
                 <span>
                   <small>Location</small>
-                  <b>Chitwan, Nepal • Open to Remote Worldwide</b>
+                  <b>Kathmandu, Nepal • Open to Remote Worldwide</b>
                 </span>
               </div>
               <div className="socials">
                 <a href="https://github.com/RamNP" aria-label="GitHub">
                   <Github size={17} />
                 </a>
-                <a href="#contact" aria-label="LinkedIn">
+                <a
+                  href="https://www.linkedin.com/in/ram-pariyar-920942280/"
+                  aria-label="LinkedIn"
+                >
                   <Linkedin size={17} />
                 </a>
-                <a href="mailto:ram@developer.build" aria-label="Email">
+                <a
+                  href="mailto:pariyarram2023@gmail.com.build"
+                  aria-label="Email"
+                >
                   <Mail size={17} />
                 </a>
               </div>
@@ -515,11 +539,11 @@ export default function Home() {
               <div className="form-row">
                 <label>
                   Your Name
-                  <input required placeholder="John Doe" />
+                  <input required placeholder="Enter name" />
                 </label>
                 <label>
                   Email Address
-                  <input required type="email" placeholder="john@example.com" />
+                  <input required type="email" placeholder="Enter Email" />
                 </label>
               </div>
               <label>
@@ -592,10 +616,13 @@ export default function Home() {
             <a href="https://github.com/RamNP">
               <Github size={14} /> GitHub
             </a>
-            <a href="#contact">
+            <a
+              href="https://www.linkedin.com/in/ram-pariyar-920942280/"
+              aria-label="LinkedIn"
+            >
               <Linkedin size={14} /> LinkedIn
             </a>
-            <a href="mailto:ram@developer.build">
+            <a href="mailto:pariyarram2023@gmail.com">
               <Mail size={14} /> Email
             </a>
           </div>
