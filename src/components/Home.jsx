@@ -5,6 +5,7 @@ import {
   BriefcaseBusiness,
   CheckCircle2,
   Code2,
+  Clock3,
   Database,
   Download,
   ExternalLink,
@@ -38,6 +39,7 @@ const projects = [
     description:
       "Digital transit platform with QR validation, online renewals, payments, and offline route caching.",
     tags: ["Kotlin", "Jetpack Compose", "REST API"],
+    category: "Mobile",
     tone: "project-green",
     icon: Smartphone,
   },
@@ -47,6 +49,7 @@ const projects = [
     description:
       "Fleet tracking, automated boarding verification, route assistance, and real-time alerts for families.",
     tags: ["Flutter", "Firebase", "Cloud Functions"],
+    category: "Mobile",
     tone: "project-amber",
     icon: CheckCircle2,
   },
@@ -56,17 +59,9 @@ const projects = [
     description:
       "A city guide for cultural heritage, safari bookings, offline maps, and local homestay directories.",
     tags: ["Flutter", "REST API", "Mapbox SDK"],
+    category: "Mobile",
     tone: "project-sage",
     icon: MapPin,
-  },
-  {
-    title: "Robo Controller",
-    type: "Flutter Mobile App",
-    description:
-      "Bluetooth-based robot controller for real-time movement, device control, and wireless communication with ESP32-powered robots.",
-    tags: ["Flutter", "Dart", "Bluetooth BLE", "ESP32"],
-    tone: "project-blue",
-    icon: Smartphone,
   },
   {
     title: "Dajuvai Multi-Vendor Commerce",
@@ -76,6 +71,7 @@ const projects = [
     tags: ["Flutter", "Django REST", "Payment API"],
     tone: "project-dark",
     icon: BriefcaseBusiness,
+    category: "Full-Stack",
   },
 ];
 const services = [
@@ -118,9 +114,7 @@ export default function Home() {
   const visibleProjects = projects.filter(
     (project) =>
       filter === "All Work" ||
-      (filter === "Mobile"
-        ? project.type.includes("App")
-        : !project.type.includes("App")),
+      project.category === filter,
   );
 
   return (
@@ -160,15 +154,16 @@ export default function Home() {
         <section className="hero section-wrap">
           <div className="hero-copy">
             <div className="eyebrow status">
-              <span /> Available for hire
+              <span /> Hello There! Available for hire
             </div>
             <h1>
               I&apos;m a Mobile &amp; <em>Web Application</em> Developer.
             </h1>
             <p>
-              Crafting fluid mobile applications with Flutter, Kotlin &amp;
-              Jetpack Compose, paired with robust web experiences using React
-              and Vite.
+              Crafting fluid, modern mobile applications with Flutter, Kotlin
+              &amp; Jetpack Compose, paired with robust web experiences using
+              React, Vite &amp; Tailwind CSS. Specializing in scalable
+              architecture, API integration, and delightful micro-interactions.
             </p>
             <div className="hero-actions">
               <a className="button button-dark" href="#projects">
@@ -338,7 +333,7 @@ export default function Home() {
                   <span>Clean Architecture</span>
                 </div>
                 <footer>
-                  Core Proficiency <b>90% Mastery</b>
+                  Core Proficiency <b>{title === "Mobile Engineering" ? "95% Mastery" : title === "Web & Frontend" ? "90% Mastery" : "88% Mastery"}</b>
                 </footer>
               </article>
             ))}
@@ -510,6 +505,13 @@ export default function Home() {
                   <b>Kathmandu, Nepal • Open to Remote Worldwide</b>
                 </span>
               </div>
+              <div className="contact-detail">
+                <Clock3 size={18} />
+                <span>
+                  <small>Availability</small>
+                  <b>Immediate for Q3/Q4 Projects</b>
+                </span>
+              </div>
               <div className="socials">
                 <a href="https://github.com/RamNP" aria-label="GitHub">
                   <Github size={17} />
@@ -521,7 +523,7 @@ export default function Home() {
                   <Linkedin size={17} />
                 </a>
                 <a
-                  href="mailto:pariyarram2023@gmail.com.build"
+                  href="mailto:pariyarram2023@gmail.com"
                   aria-label="Email"
                 >
                   <Mail size={17} />
@@ -539,11 +541,11 @@ export default function Home() {
               <div className="form-row">
                 <label>
                   Your Name
-                  <input required placeholder="Enter name" />
+                  <input required placeholder="John Doe" />
                 </label>
                 <label>
                   Email Address
-                  <input required type="email" placeholder="Enter Email" />
+                  <input required type="email" placeholder="john@example.com" />
                 </label>
               </div>
               <label>
