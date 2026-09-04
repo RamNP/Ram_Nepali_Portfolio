@@ -1,5 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
 @import "tailwindcss";
 
-.clip-path-diagonal {
-    clip-path: polygon(0 0, 10% 0, 0.5% 100%, 0% 100%);
-}
+:root { font-family: "Plus Jakarta Sans", sans-serif; color: #121c2a; background: #f8f9ff; font-synthesis: none; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; min-width: 320px; background: #f8f9ff; }
+button, input, textarea, select { font: inherit; }
+a { color: inherit; text-decoration: none; }
