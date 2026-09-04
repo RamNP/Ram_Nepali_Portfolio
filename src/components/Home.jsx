@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
@@ -20,10 +20,12 @@ import {
   Smartphone,
   Sparkles,
   Terminal,
+  User,
   X,
 } from "lucide-react";
 
 const navItems = [
+  ["Home", "top"],
   ["About", "about"],
   ["Skills", "skills"],
   ["Projects", "projects"],
@@ -74,6 +76,7 @@ const projects = [
     category: "Full-Stack",
   },
 ];
+
 const services = [
   [
     Smartphone,
@@ -109,13 +112,30 @@ const services = [
 
 export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [activeNav, setActiveNav] = useState("top");
   const [filter, setFilter] = useState("All Work");
   const [sent, setSent] = useState(false);
   const visibleProjects = projects.filter(
-    (project) =>
-      filter === "All Work" ||
-      project.category === filter,
+    (project) => filter === "All Work" || project.category === filter,
   );
+
+  // Track active section on scroll
+  useEffect(() => {
+    const handleScroll = () => {
+      const sections = ["top", "about", "skills", "projects", "services", "process", "contact"];
+      for (const section of sections) {
+        const element = document.getElementById(section);
+        if (element) {
+          const rect = element.getBoundingClientRect();
+          if (rect.top <= 100) {
+            setActiveNav(section);
+          }
+        }
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   return (
     <div className="site-shell">
@@ -131,17 +151,27 @@ export default function Home() {
         </a>
         <nav className={menuOpen ? "main-nav open" : "main-nav"}>
           {navItems.map(([label, id]) => (
-            <a key={id} href={`#${id}`} onClick={() => setMenuOpen(false)}>
+            <a 
+              key={id} 
+              href={`#${id}`} 
+              className={activeNav === id ? "active" : ""}
+              onClick={() => setMenuOpen(false)}
+            >
               {label}
             </a>
           ))}
         </nav>
-        <a className="button button-dark header-cta" href="#contact">
-          Hire Me{" "}
-          <span>
-            <ArrowUpRight size={20} />
-          </span>
-        </a>
+        <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
+          <a className="button button-dark header-cta" href="#contact">
+            Hire Me{" "}
+            <span>
+              <ArrowUpRight size={20} />
+            </span>
+          </a>
+          <div className="header-avatar" title="Profile">
+            <User size={20} />
+          </div>
+        </div>
         <button
           className="menu-button"
           aria-label="Toggle navigation"
@@ -191,29 +221,44 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="hero-visual">
+          <div className="hero-visual relative mx-auto min-h-[430px] w-full max-w-[520px] lg:min-h-[520px]">
             <div className="sun-disc" />
             <div className="portrait-frame">
-              <img
-                src="/ram_profile.jpg"
-                alt="Ram Nepali, mobile and web developer"
-              />
+              <img src="/ram.png" alt="Ram Nepali, mobile and web developer" />
             </div>
+
+            {/* Redesigned circular orbit badge: white ring, curved text, dark
+                green center disc with icon — matches the reference badge. */}
             <div className="orbit-badge">
-              <span>AVAILABLE FOR PROJECTS • HIRE ME •</span>
-              <Terminal size={20} />
+              <svg viewBox="0 0 100 100" className="orbit-badge-ring">
+                <path
+                  id="orbitTextPath"
+                  d="M 50,50 m -38,0 a 38,38 0 1,1 76,0 a 38,38 0 1,1 -76,0"
+                  fill="none"
+                />
+                <text className="orbit-badge-text">
+                  <textPath href="#orbitTextPath" startOffset="0%">
+                    AVAILABLE FOR PROJECTS • HIRE ME •
+                  </textPath>
+                </text>
+              </svg>
+              <div className="orbit-badge-core">
+                <Terminal size={18} />
+              </div>
             </div>
-            <div className="float-tag tag-one">● Flutter Specialist</div>
+            <div className="float-tag tag-one">Flutter Specialist</div>
             <div className="float-tag tag-two">Android &amp; Compose</div>
             <div className="float-tag tag-three">React &amp; Tailwind</div>
           </div>
         </section>
         <div className="ticker">
           <div>
-            Flutter Apps <b>✦</b> Kotlin &amp; Jetpack Compose <b>✦</b> React
-            &amp; Vite <b>✦</b> Tailwind CSS <b>✦</b> Django REST API <b>✦</b>{" "}
-            Firebase Integration <b>✦</b> Bluetooth / BLE <b>✦</b> Clean
-            Architecture <b>✦</b>
+            Flutter <b>✦</b> Android Development <b>✦</b> Kotlin &amp; Jetpack
+            Compose <b>✦</b> React &amp; Vite <b>✦</b> JavaScript <b>✦</b>{" "}
+            Tailwind CSS <b>✦</b> Responsive Web Design <b>✦</b> Django REST API{" "}
+            <b>✦</b> REST API Integration <b>✦</b> Firebase <b>✦</b> IoT App
+            Integration <b>✦</b> Bluetooth / BLE <b>✦</b> State Management{" "}
+            <b>✦</b> Clean Architecture <b>✦</b> Git &amp; GitHub
           </div>
         </div>
         <section className="about-section" id="about">
@@ -333,7 +378,14 @@ export default function Home() {
                   <span>Clean Architecture</span>
                 </div>
                 <footer>
-                  Core Proficiency <b>{title === "Mobile Engineering" ? "95% Mastery" : title === "Web & Frontend" ? "90% Mastery" : "88% Mastery"}</b>
+                  Core Proficiency{" "}
+                  <b>
+                    {title === "Mobile Engineering"
+                      ? "95% Mastery"
+                      : title === "Web & Frontend"
+                        ? "90% Mastery"
+                        : "88% Mastery"}
+                  </b>
                 </footer>
               </article>
             ))}
@@ -522,10 +574,7 @@ export default function Home() {
                 >
                   <Linkedin size={17} />
                 </a>
-                <a
-                  href="mailto:pariyarram2023@gmail.com"
-                  aria-label="Email"
-                >
+                <a href="mailto:pariyarram2023@gmail.com" aria-label="Email">
                   <Mail size={17} />
                 </a>
               </div>
@@ -597,7 +646,7 @@ export default function Home() {
           </div>
           <div>
             <h3>Navigation</h3>
-            {navItems.slice(0, 4).map(([label, id]) => (
+            {navItems.slice(1, 5).map(([label, id]) => (
               <a key={id} href={`#${id}`}>
                 {label}
               </a>
