@@ -526,6 +526,88 @@ h2 em {
   color: #bad0c3;
   max-width: 650px;
 }
+.experience-section {
+  padding: 96px 0;
+  background: #fff;
+}
+.experience-list {
+  display: grid;
+  gap: 22px;
+  max-width: 900px;
+  margin: auto;
+}
+.experience-company {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 32px;
+  padding: 26px;
+  border: 1px solid rgba(16, 41, 30, 0.08);
+  border-radius: 16px;
+  background: #f8f9ff;
+  box-shadow: 0 12px 25px rgba(16, 41, 30, 0.04);
+}
+.company-heading {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+.company-icon {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  flex-shrink: 0;
+  place-items: center;
+  border-radius: 11px;
+  color: var(--amber);
+  background: var(--ink);
+}
+.company-heading h3 {
+  margin: 3px 0 5px;
+  color: var(--ink);
+  font-size: 15px;
+}
+.company-heading span,
+.role-meta span,
+.role-meta time {
+  color: #78857d;
+  font-size: 10px;
+}
+.role-list {
+  display: grid;
+  gap: 24px;
+}
+.experience-role + .experience-role {
+  padding-top: 24px;
+  border-top: 1px solid var(--line);
+}
+.role-meta {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+.role-meta h3 {
+  margin: 0 0 5px;
+  color: var(--ink);
+  font-size: 15px;
+}
+.role-meta time {
+  padding: 5px 8px;
+  border-radius: 999px;
+  color: #805000;
+  background: #ffedca;
+  white-space: nowrap;
+}
+.experience-role p {
+  max-width: 650px;
+  margin: 12px 0 14px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.65;
+}
+.experience-role .chip-row span {
+  background: #eaf0e6;
+}
 .metrics {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -1060,6 +1142,10 @@ h2 em {
   .about-grid,
   .contact-panel {
     grid-template-columns: 1fr;
+  }
+  .experience-company {
+    grid-template-columns: 1fr;
+    gap: 22px;
   }
   .about-grid {
     gap: 35px;

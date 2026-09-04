@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
+  Bot,
   BriefcaseBusiness,
+  Building2,
   CheckCircle2,
   Code2,
   Clock3,
@@ -27,11 +29,74 @@ import {
 const navItems = [
   ["Home", "top"],
   ["About", "about"],
+  ["Experience", "experience"],
   ["Skills", "skills"],
-  ["Projects", "projects"],
-  ["Services", "services"],
-  ["Process", "process"],
+  ["Work", "projects"],
   ["Contact", "contact"],
+];
+
+const experience = [
+  {
+    company: "ING Skill Academy",
+    location: "On-site",
+    roles: [
+      {
+        title: "Android and Flutter Developer",
+        type: "Full-time",
+        dates: "Jul 2024 - Present",
+        description:
+          "Building and maintaining production mobile applications with Flutter and native Android, from responsive interfaces to reliable API and device integrations.",
+        skills: [
+          "Flutter Development",
+          "Mobile App Development",
+          "Dart",
+          "Kotlin",
+          "Android Jetpack",
+          "REST APIs",
+          "State Management",
+          "IoT Integration",
+        ],
+      },
+      {
+        title: "Android Developer",
+        type: "Internship",
+        dates: "Mar 2022 - Jul 2024",
+        description:
+          "Developed and maintained Android applications using Kotlin, while integrating cross-platform functionality with Flutter and collaborating on polished mobile experiences.",
+        skills: [
+          "Mobile Application Development",
+          "Android Framework",
+          "Kotlin Coroutines",
+          "Room Database",
+          "REST APIs",
+          "Android Design",
+        ],
+      },
+    ],
+  },
+  {
+    company: "Innovate Tech",
+    location: "Kathmandu, Nepal",
+    roles: [
+      {
+        title: "Android Developer",
+        type: "Internship",
+        dates: "Jun 2023 - Feb 2024",
+        description:
+          "Worked on Android application development with Kotlin, Jetpack components, local data storage, REST API integration, and structured state management.",
+        skills: [
+          "Mobile Application Development",
+          "Kotlin",
+          "Android Framework",
+          "Kotlin Coroutines",
+          "Android Jetpack",
+          "Room Database",
+          "REST APIs",
+          "State Management",
+        ],
+      },
+    ],
+  },
 ];
 
 const projects = [
@@ -44,6 +109,26 @@ const projects = [
     category: "Mobile",
     tone: "project-green",
     icon: Smartphone,
+  },
+  {
+    title: "Bus Pass Web app for Admins",
+    type: "Web Admin App",
+    description:
+      "Full-stack dashboard for pass approvals, route and user management, payment monitoring, and transit reports.",
+    tags: ["HTML & CSS", "Django REST", "PostgreSQL"],
+    category: "Web",
+    tone: "project-dark",
+    icon: Layers3,
+  },
+  {
+    title: "Robo Controller Mobile App",
+    type: "Bluetooth IoT App",
+    description:
+      "Mobile controller for robot navigation, live sensor telemetry, custom commands, and reliable BLE pairing.",
+    tags: ["Flutter", "Bluetooth BLE", "IoT Integration"],
+    category: "Mobile",
+    tone: "project-sage",
+    icon: Bot,
   },
   {
     title: "Bus Attendance & Tracking",
@@ -66,15 +151,17 @@ const projects = [
     icon: MapPin,
   },
   {
-    title: "Dajuvai Multi-Vendor Commerce",
+    title: "Dajuvai User Mobile App",
     type: "Commercial Mobile App",
     description:
       "A full marketplace with dynamic catalogs, wallet payments, seller routing, and instant order tracking.",
     tags: ["Flutter", "Django REST", "Payment API"],
     tone: "project-dark",
     icon: BriefcaseBusiness,
-    category: "Full-Stack",
+    category: "Mobile",
   },
+
+  
 ];
 
 const services = [
@@ -122,7 +209,7 @@ export default function Home() {
   // Track active section on scroll
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["top", "about", "skills", "projects", "services", "process", "contact"];
+      const sections = ["top", "about", "experience", "skills", "projects", "services", "process", "contact"];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -145,7 +232,7 @@ export default function Home() {
             <Terminal size={18} />
           </span>
           <span>
-            <strong>Ram.dev</strong>
+            <strong>Ram.nepali</strong>
             <small>PORTFOLIO</small>
           </span>
         </a>
@@ -330,6 +417,44 @@ export default function Home() {
             </div>
           </div>
         </section>
+        <section className="experience-section" id="experience">
+          <div className="section-wrap">
+            <div className="experience-list">
+              {experience.map(({ company, location, roles }) => (
+                <article className="experience-company" key={company}>
+                  <div className="company-heading">
+                    <div className="company-icon">
+                      <Building2 size={21} />
+                    </div>
+                    <div>
+                      <h3>{company}</h3>
+                      <span>{location}</span>
+                    </div>
+                  </div>
+                  <div className="role-list">
+                    {roles.map(({ title, type, dates, description, skills }) => (
+                      <div className="experience-role" key={`${company}-${title}`}>
+                        <div className="role-meta">
+                          <div>
+                            <h3>{title}</h3>
+                            <span>{type}</span>
+                          </div>
+                          <time>{dates}</time>
+                        </div>
+                        <p>{description}</p>
+                        <div className="chip-row">
+                          {skills.map((skill) => (
+                            <span key={skill}>{skill}</span>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
+        </section>
         <section className="section-wrap standard-section" id="skills">
           <div className="section-heading centered">
             <div className="eyebrow">— Tech Stack</div>
@@ -405,7 +530,7 @@ export default function Home() {
                 </p>
               </div>
               <div className="filter-row">
-                {["All Work", "Mobile", "Full-Stack"].map((item) => (
+                {["All Work", "Mobile", "Web", "Full-Stack"].map((item) => (
                   <button
                     key={item}
                     className={filter === item ? "active" : ""}
@@ -635,7 +760,7 @@ export default function Home() {
                 <Terminal size={18} />
               </span>
               <span>
-                <strong>Ram.dev</strong>
+                <strong>Ram.nepali</strong>
                 <small>PORTFOLIO</small>
               </span>
             </a>
@@ -646,7 +771,7 @@ export default function Home() {
           </div>
           <div>
             <h3>Navigation</h3>
-            {navItems.slice(1, 5).map(([label, id]) => (
+            {navItems.slice(1, 6).map(([label, id]) => (
               <a key={id} href={`#${id}`}>
                 {label}
               </a>
@@ -679,7 +804,7 @@ export default function Home() {
           </div>
         </div>
         <div className="footer-bottom section-wrap">
-          <span>© 2026 Ram.dev. All rights reserved.</span>
+          <span>© 2026 Ram.nepali. All rights reserved.</span>
           <span>Crafted with precision &amp; care.</span>
         </div>
       </footer>
