@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import {
   ArrowRight,
   ArrowUpRight,
+  BookOpen,
   Bot,
   BriefcaseBusiness,
   Building2,
@@ -11,6 +12,7 @@ import {
   Database,
   Download,
   ExternalLink,
+  GraduationCap,
   Github,
   Handshake,
   Layers3,
@@ -19,6 +21,7 @@ import {
   MapPin,
   Menu,
   Send,
+  School,
   Smartphone,
   Sparkles,
   Terminal,
@@ -30,6 +33,7 @@ const navItems = [
   ["Home", "top"],
   ["About", "about"],
   ["Experience", "experience"],
+  ["Education", "education"],
   ["Skills", "skills"],
   ["Work", "projects"],
   ["Contact", "contact"],
@@ -99,6 +103,40 @@ const experience = [
   },
 ];
 
+const education = [
+  {
+    institution: "Islington College",
+    title: "BSc (Hons) Computing – Mobile Application Development",
+    dates: "2021 - 2024",
+    description:
+      "Developed strong skills in software development, web and mobile application development, databases, networking, and computing technologies through practical project work.",
+    result: "Completed / Graduated",
+    icon: GraduationCap,
+    tone: "education-green",
+  },
+
+  {
+    institution: "Xavier International College",
+    title: "Higher Secondary (+2 Management) in Computer Science",
+    dates: "2019 - 2020",
+    description:
+      "Built a strong foundation in computer science, programming fundamentals, business studies, mathematics, and problem-solving skills.",
+    result: "Computer Science Stream",
+    icon: BookOpen,
+    tone: "education-amber",
+  },
+  {
+    institution: "Terse Secondary School",
+    title: "Secondary Education Examination (SEE)",
+    dates: "2018",
+    description:
+      "Distinction-accredited track with a strong focus on foundational science, computer studies, and active technical club leadership.",
+    result: "Class 10 Distinction",
+    icon: School,
+    tone: "education-dark",
+  },
+];
+
 const projects = [
   {
     title: "Bus Pass Management System",
@@ -160,8 +198,6 @@ const projects = [
     icon: BriefcaseBusiness,
     category: "Mobile",
   },
-
-  
 ];
 
 const services = [
@@ -209,7 +245,17 @@ export default function Home() {
   // Track active section on scroll
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["top", "about", "experience", "skills", "projects", "services", "process", "contact"];
+      const sections = [
+        "top",
+        "about",
+        "experience",
+        "education",
+        "skills",
+        "projects",
+        "services",
+        "process",
+        "contact",
+      ];
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
@@ -238,9 +284,9 @@ export default function Home() {
         </a>
         <nav className={menuOpen ? "main-nav open" : "main-nav"}>
           {navItems.map(([label, id]) => (
-            <a 
-              key={id} 
-              href={`#${id}`} 
+            <a
+              key={id}
+              href={`#${id}`}
               className={activeNav === id ? "active" : ""}
               onClick={() => setMenuOpen(false)}
             >
@@ -432,26 +478,80 @@ export default function Home() {
                     </div>
                   </div>
                   <div className="role-list">
-                    {roles.map(({ title, type, dates, description, skills }) => (
-                      <div className="experience-role" key={`${company}-${title}`}>
-                        <div className="role-meta">
-                          <div>
-                            <h3>{title}</h3>
-                            <span>{type}</span>
+                    {roles.map(
+                      ({ title, type, dates, description, skills }) => (
+                        <div
+                          className="experience-role"
+                          key={`${company}-${title}`}
+                        >
+                          <div className="role-meta">
+                            <div>
+                              <h3>{title}</h3>
+                              <span>{type}</span>
+                            </div>
+                            <time>{dates}</time>
                           </div>
-                          <time>{dates}</time>
+                          <p>{description}</p>
+                          <div className="chip-row">
+                            {skills.map((skill) => (
+                              <span key={skill}>{skill}</span>
+                            ))}
+                          </div>
                         </div>
-                        <p>{description}</p>
-                        <div className="chip-row">
-                          {skills.map((skill) => (
-                            <span key={skill}>{skill}</span>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
+                      ),
+                    )}
                   </div>
                 </article>
               ))}
+            </div>
+          </div>
+        </section>
+        <section className="education-section" id="education">
+          <div className="section-wrap">
+            <div className="section-heading centered">
+              <div className="eyebrow">— Academic Background</div>
+              <h2>
+                Education <em>&amp; Qualifications</em>
+              </h2>
+              <p>
+                Academic foundations in computing, communication, and software
+                engineering that power my work.
+              </p>
+            </div>
+            <div className="education-grid">
+              {education.map(
+                ({
+                  institution,
+                  title,
+                  dates,
+                  description,
+                  result,
+                  icon: Icon,
+                  tone,
+                }) => (
+                  <article className="education-card" key={institution}>
+                    <div className={`education-icon ${tone}`}>
+                      <Icon size={17} />
+                    </div>
+                    <div className="education-meta">
+                      <span>{institution}</span>
+                      <b>{dates}</b>
+                    </div>
+                    <h3>{title}</h3>
+                    <p>{description}</p>
+                    <footer>
+                      <span>{result}</span>
+                      <span>
+                        {institution === "Bellington College"
+                          ? "Degree"
+                          : institution === "Xavier International College"
+                            ? "+2 Level"
+                            : "SEE Board"}
+                      </span>
+                    </footer>
+                  </article>
+                ),
+              )}
             </div>
           </div>
         </section>
@@ -522,7 +622,7 @@ export default function Home() {
               <div>
                 <div className="eyebrow">— Featured Work</div>
                 <h2>
-                  Recent <em>Applications &amp; Case Studies</em>
+                  Recent <em>Applications</em>
                 </h2>
                 <p>
                   Explore high-impact mobile and web applications built to
@@ -566,9 +666,6 @@ export default function Home() {
                       <div className="project-links">
                         <a href="#contact">
                           View Project <ExternalLink size={14} />
-                        </a>
-                        <a href="#contact">
-                          Case Study <ArrowUpRight size={14} />
                         </a>
                       </div>
                     </div>
