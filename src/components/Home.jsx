@@ -378,7 +378,7 @@ export default function Home() {
           <div className="hero-visual relative mx-auto min-h-[430px] w-full max-w-[520px] lg:min-h-[520px]" data-reveal="hero-visual">
             <div className="sun-disc" />
             <div className="portrait-frame">
-              <img src="/ram.png" alt="Ram Nepali, mobile and web developer" />
+              <img src="/Ram.png" alt="Ram Nepali, mobile and web developer" />
             </div>
 
             {/* Redesigned circular orbit badge: white ring, curved text, dark
@@ -421,7 +421,7 @@ export default function Home() {
               <div className="about-disc" />
               <div className="about-photo">
                 <img
-                  src="/ram_profile.jpg"
+                  src="/Ram_profile.jpg"
                   alt="Ram Nepali working as a developer"
                 />
               </div>
