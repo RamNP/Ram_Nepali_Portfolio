@@ -9,6 +9,7 @@ import {
   CheckCircle2,
   Code2,
   Clock3,
+  Cloud,
   Database,
   Download,
   ExternalLink,
@@ -179,7 +180,7 @@ const projects = [
     icon: CheckCircle2,
   },
   {
-    title: "Ratnanagar Tourism Guide",
+    title: "Ratnanagar Tourism",
     type: "Tourism & Travel App",
     description:
       "A city guide for cultural heritage, safari bookings, offline maps, and local homestay directories.",
@@ -187,6 +188,7 @@ const projects = [
     category: "Mobile",
     tone: "project-sage",
     icon: MapPin,
+    link: "https://play.google.com/store/apps/details?id=com.ratnanagartourism&hl=en&pli=1",
   },
   {
     title: "Dajuvai User Mobile App",
@@ -270,6 +272,24 @@ export default function Home() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const revealItems = document.querySelectorAll("[data-reveal]");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.12, rootMargin: "0px 0px -40px" },
+    );
+
+    revealItems.forEach((item) => observer.observe(item));
+    return () => observer.disconnect();
+  }, [filter]);
+
   return (
     <div className="site-shell">
       <header className="site-header">
@@ -316,19 +336,19 @@ export default function Home() {
       <main id="top">
         <section className="hero section-wrap">
           <div className="hero-copy">
-            <div className="eyebrow status">
+            <div className="eyebrow status" data-reveal="hero">
               <span /> Hello There! Available for hire
             </div>
-            <h1>
+            <h1 data-reveal="hero">
               I&apos;m a Mobile &amp; <em>Web Application</em> Developer.
             </h1>
-            <p>
+            <p data-reveal="hero">
               Crafting fluid, modern mobile applications with Flutter, Kotlin
               &amp; Jetpack Compose, paired with robust web experiences using
               React, Vite &amp; Tailwind CSS. Specializing in scalable
               architecture, API integration, and delightful micro-interactions.
             </p>
-            <div className="hero-actions">
+            <div className="hero-actions" data-reveal="hero">
               <a className="button button-dark" href="#projects">
                 View My Projects <ArrowRight size={17} />
               </a>
@@ -336,7 +356,7 @@ export default function Home() {
                 <Handshake size={17} /> Let&apos;s Work Together
               </a>
             </div>
-            <div className="quick-stats">
+            <div className="quick-stats" data-reveal="hero">
               <div>
                 <CheckCircle2 size={25} />
                 <span>
@@ -354,7 +374,7 @@ export default function Home() {
               </div>
             </div>
           </div>
-          <div className="hero-visual relative mx-auto min-h-[430px] w-full max-w-[520px] lg:min-h-[520px]">
+          <div className="hero-visual relative mx-auto min-h-[430px] w-full max-w-[520px] lg:min-h-[520px]" data-reveal="hero-visual">
             <div className="sun-disc" />
             <div className="portrait-frame">
               <img src="/ram.png" alt="Ram Nepali, mobile and web developer" />
@@ -394,9 +414,9 @@ export default function Home() {
             <b>✦</b> Clean Architecture <b>✦</b> Git &amp; GitHub
           </div>
         </div>
-        <section className="about-section" id="about">
+        <section className="about-section" id="about" data-reveal="section">
           <div className="section-wrap about-grid">
-            <div className="about-visual">
+            <div className="about-visual" data-reveal="about-image">
               <div className="about-disc" />
               <div className="about-photo">
                 <img
@@ -410,7 +430,7 @@ export default function Home() {
                 <span>Web & Mobile</span>
               </div>
             </div>
-            <div className="about-copy">
+            <div className="about-copy" data-reveal="about-copy">
               <div className="eyebrow">— About Me</div>
               <h2>
                 Who is this <em>Mobile &amp; Web Developer</em>?
@@ -428,19 +448,19 @@ export default function Home() {
                 believe in writing testable, production-ready code.
               </p>
               <div className="metrics">
-                <div>
+                <div data-reveal="metric">
                   <b>3+</b>
                   <span>Years Experience</span>
                 </div>
-                <div>
+                <div data-reveal="metric">
                   <b>25+</b>
                   <span>Projects Shipped</span>
                 </div>
-                <div>
+                <div data-reveal="metric">
                   <b>100%</b>
                   <span>Client Satisfaction</span>
                 </div>
-                <div>
+                <div data-reveal="metric">
                   <b>10+</b>
                   <span>Store Launches</span>
                 </div>
@@ -467,7 +487,7 @@ export default function Home() {
           <div className="section-wrap">
             <div className="experience-list">
               {experience.map(({ company, location, roles }) => (
-                <article className="experience-company" key={company}>
+                <article className="experience-company" key={company} data-reveal="card">
                   <div className="company-heading">
                     <div className="company-icon">
                       <Building2 size={21} />
@@ -482,6 +502,7 @@ export default function Home() {
                       ({ title, type, dates, description, skills }) => (
                         <div
                           className="experience-role"
+                          data-reveal="role"
                           key={`${company}-${title}`}
                         >
                           <div className="role-meta">
@@ -529,9 +550,9 @@ export default function Home() {
                   icon: Icon,
                   tone,
                 }) => (
-                  <article className="education-card" key={institution}>
+                  <article className="education-card" key={institution} data-reveal="card">
                     <div className={`education-icon ${tone}`}>
-                      <Icon size={17} />
+                      {React.createElement(Icon, { size: 17 })}
                     </div>
                     <div className="education-meta">
                       <span>{institution}</span>
@@ -555,7 +576,7 @@ export default function Home() {
             </div>
           </div>
         </section>
-        <section className="section-wrap standard-section" id="skills">
+        <section className="section-wrap standard-section" id="skills" data-reveal="section">
           <div className="section-heading centered">
             <div className="eyebrow">— Tech Stack</div>
             <h2>
@@ -563,8 +584,8 @@ export default function Home() {
               <br /> Behind My Work
             </h2>
             <p>
-              Battle-tested toolchains, frameworks, and architectural principles
-              applied across production deployments.
+              Modern tools, frameworks, and development practices I use to build
+              reliable mobile and web applications.
             </p>
           </div>
           <div className="skill-grid">
@@ -572,45 +593,63 @@ export default function Home() {
               [
                 Smartphone,
                 "Mobile Engineering",
-                "Native Android and responsive cross-platform apps with smooth animations, caching, and offline-first sync.",
-                "Flutter & Dart",
-                "Kotlin Native",
+                "Build cross-platform and native mobile applications with modern architecture, state management, device integrations, smooth animations, and reliable performance.",
+                ["Flutter & Dart", "Kotlin & Jetpack Compose", "Android Development"],
+                "95% Mastery",
               ],
               [
                 Code2,
                 "Web & Frontend",
-                "Performant, accessible, reactive single-page apps, dashboards, and responsive web portals.",
-                "React.js",
-                "Tailwind CSS",
+                "Build responsive, modern web applications with reusable components, clean interfaces, scalable frontend architecture, and smooth user experiences.",
+                ["React.js", "Vite", "Tailwind CSS"],
+                "90% Mastery",
               ],
               [
                 Database,
-                "Backend & Cloud",
-                "Robust API layers, cloud synchronization, authorization, and reliable integrations.",
-                "Django REST",
-                "Firebase Suite",
+                "Backend & API",
+                "Integrate REST APIs and develop basic backend services with authentication, data handling, and database integration using Django.",
+                ["Django REST", "REST API", "Authentication"],
+                "75% Mastery",
               ],
-            ].map(([Icon, title, text, tag1, tag2]) => (
-              <article className="skill-card" key={title}>
+              [
+                Cloud,
+                "Firebase & Cloud",
+                "Integrate cloud services for authentication, real-time data, notifications, storage, and reliable application synchronization.",
+                ["Firebase", "Firestore", "Cloud Messaging"],
+                "82% Mastery",
+              ],
+              [
+                Bot,
+                "IoT & Device Integration",
+                "Connect mobile applications with smart devices and embedded systems using Bluetooth, BLE, ESP32, and IoT technologies.",
+                ["Bluetooth / BLE", "ESP32", "IoT Integration"],
+                "80% Mastery",
+              ],
+              [
+                Layers3,
+                "Architecture & Development",
+                "Apply clean architecture, state management, API integration, version control, and maintainable development practices across web and mobile projects.",
+                ["Clean Architecture", "State Management", "Git & GitHub"],
+                "88% Mastery",
+              ],
+            ].map(([Icon, title, text, tags, proficiency]) => (
+              <article className="skill-card" key={title} data-reveal="card">
                 <div className="icon-tile">
                   {React.createElement(Icon, { size: 21 })}
                 </div>
                 <h3>{title}</h3>
                 <p>{text}</p>
                 <div className="chip-row">
-                  <span>{tag1}</span>
-                  <span>{tag2}</span>
-                  <span>Clean Architecture</span>
+                  {tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
                 </div>
                 <footer>
-                  Core Proficiency{" "}
-                  <b>
-                    {title === "Mobile Engineering"
-                      ? "95% Mastery"
-                      : title === "Web & Frontend"
-                        ? "90% Mastery"
-                        : "88% Mastery"}
-                  </b>
+                  <span>Core Proficiency</span>
+                  <b>{proficiency}</b>
+                  <span className="proficiency-bar" aria-hidden="true">
+                    <span style={{ "--progress": proficiency }} />
+                  </span>
                 </footer>
               </article>
             ))}
@@ -641,10 +680,10 @@ export default function Home() {
                 ))}
               </div>
             </div>
-            <div className="project-grid">
+            <div className="project-grid" key={filter}>
               {visibleProjects.map(
-                ({ title, type, description, tags, tone, icon: Icon }) => (
-                  <article className="project-card" key={title}>
+                ({ title, type, description, tags, tone, icon: Icon, link }) => (
+                  <article className="project-card" key={title} data-reveal="card">
                     <div className={`project-art ${tone}`}>
                       {React.createElement(Icon, { size: 48 })}
                       <span>{type}</span>
@@ -664,7 +703,11 @@ export default function Home() {
                         ))}
                       </div>
                       <div className="project-links">
-                        <a href="#contact">
+                        <a
+                          href={link || "#contact"}
+                          target={link ? "_blank" : undefined}
+                          rel={link ? "noreferrer" : undefined}
+                        >
                           View Project <ExternalLink size={14} />
                         </a>
                       </div>
@@ -693,7 +736,7 @@ export default function Home() {
           </div>
           <div className="service-grid">
             {services.map(([Icon, title, text]) => (
-              <article className="service-card" key={title}>
+              <article className="service-card" key={title} data-reveal="card">
                 <div className="icon-tile">
                   {React.createElement(Icon, { size: 21 })}
                 </div>
@@ -741,7 +784,7 @@ export default function Home() {
                   "Store submissions, CI/CD automation, telemetry, and continuous updates.",
                 ],
               ].map(([number, title, text]) => (
-                <article className="process-card" key={number}>
+                <article className="process-card" key={number} data-reveal="card">
                   <b>{number}</b>
                   <h3>{title}</h3>
                   <p>{text}</p>
@@ -752,7 +795,7 @@ export default function Home() {
           </div>
         </section>
         <section className="contact-section" id="contact">
-          <div className="section-wrap contact-panel">
+          <div className="section-wrap contact-panel" data-reveal="contact">
             <div className="contact-copy">
               <div className="eyebrow">— Contact Me</div>
               <h2>
@@ -763,7 +806,7 @@ export default function Home() {
                 need an experienced full-stack engineer? Drop me a message and
                 let&apos;s get building.
               </p>
-              <div className="contact-detail">
+              <div className="contact-detail" data-reveal="detail">
                 <Mail size={18} />
                 <span>
                   <small>Email Address</small>
@@ -772,14 +815,14 @@ export default function Home() {
                   </a>
                 </span>
               </div>
-              <div className="contact-detail">
+              <div className="contact-detail" data-reveal="detail">
                 <MapPin size={18} />
                 <span>
                   <small>Location</small>
                   <b>Kathmandu, Nepal • Open to Remote Worldwide</b>
                 </span>
               </div>
-              <div className="contact-detail">
+              <div className="contact-detail" data-reveal="detail">
                 <Clock3 size={18} />
                 <span>
                   <small>Availability</small>
