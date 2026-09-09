@@ -32,12 +32,13 @@ import {
 
 const navItems = [
   ["Home", "top"],
-  ["About", "about"],
   ["Experience", "experience"],
   ["Education", "education"],
   ["Skills", "skills"],
   ["Projects", "projects"],
   ["Contact", "contact"],
+  ["About", "about"],
+
 ];
 
 const experience = [
