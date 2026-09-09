@@ -36,7 +36,7 @@ const navItems = [
   ["Experience", "experience"],
   ["Education", "education"],
   ["Skills", "skills"],
-  ["Work", "projects"],
+  ["Projects", "projects"],
   ["Contact", "contact"],
 ];
 
